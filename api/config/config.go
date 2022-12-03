@@ -6,11 +6,12 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Init() (err error) {
+func init() {
 	viper.SetConfigName("conf")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("./config")
-	err = viper.ReadInConfig()
+	err := viper.ReadInConfig()
+	fmt.Println(Getstr("lineBot.channel_secret"))
 	if err != nil {
 		fmt.Printf("viper.ReadInConfig()failed, err:%v\n", err)
 		return

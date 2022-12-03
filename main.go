@@ -1,13 +1,13 @@
 package main
 
 import (
-	"go-interview/api/apis/collections"
-	"go-interview/api/config"
+	_ "go-interview/api/config"
 	"go-interview/api/database"
+	"go-interview/api/router"
 )
 
 func main() {
-	config.Init()
 	database.SelectCollection()
-	collections.UserText_r_all()
+	router := router.InitRouter()
+	router.Run(":5555")
 }

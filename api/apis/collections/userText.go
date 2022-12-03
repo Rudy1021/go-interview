@@ -2,23 +2,33 @@ package collections
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"go-interview/api/database"
 	"go-interview/api/models"
 	"log"
+	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func UserText_c() {
+func UserText_c(conn *gin.Context) {
 	var c = database.SelectCollection()
-	res, err := c.InsertOne(context.TODO(), bson.D{{"user_id", "user123"}, {"entertext", "test"}})
+	var table models.UserText
+	conn.BindJSON(&table)
+	res, err := c.InsertOne(context.TODO(), bson.D{{"user_id", &table.User_id}, {"entertext", &table.Entertext}})
 	if err != nil {
-		fmt.Println(err)
+		conn.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "讀取失敗",
+		})
+	} else {
+		conn.JSON(http.StatusOK, gin.H{
+			"code":   001,
+			"result": res.InsertedID,
+		})
 	}
-	fmt.Println(res.InsertedID)
 }
 func UserText_r_all() {
 	var c = database.SelectCollection()
@@ -58,15 +68,28 @@ func UserText_r_all() {
 	fmt.Printf("Found multiple documents (array of pointers): %+v\n", results)
 }
 
-func UserText_r_one() {
+func UserText_r_one(conn *gin.Context) {
 	var c = database.SelectCollection()
 	var result models.UserText
-	err := c.FindOne(context.TODO(), bson.D{{"user_id", "user123"}}).Decode(&result)
+	id := conn.Param("id")
+	fmt.Print(id)
+	err := c.FindOne(context.TODO(), bson.D{{"user_id", id}}).Decode(&result)
 	if err != nil {
 		fmt.Println(err)
 	}
-	output, err := json.MarshalIndent(result, "", "    ")
-	fmt.Printf("%s\n", output)
+	outputs := fmt.Sprintf("%s", result)
+	fmt.Println(outputs)
+	if err != nil {
+		conn.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "讀取失敗",
+		})
+	} else {
+		conn.JSON(http.StatusOK, gin.H{
+			"code":   1,
+			"result": outputs,
+		})
+	}
 }
 
 func UserText_u() {
