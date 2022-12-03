@@ -4,4 +4,4 @@ lineBot:
 
 mongo:
   database: "admin"
-  collection: "userText"
+  collection: "UserText"

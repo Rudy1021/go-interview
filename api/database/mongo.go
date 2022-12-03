@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"fmt"
 	"go-interview/api/config"
 	"log"
 
@@ -32,17 +31,15 @@ func GetMgoCli() *mongo.Client {
 	return mgoCli
 }
 
-func RunDatabase() {
+func SelectCollection() *mongo.Collection {
 	var (
 		client     = GetMgoCli()
 		db         *mongo.Database
 		collection *mongo.Collection
 	)
-	//2.选择数据库 my_db
-	db = client.Database(config.Getstr("mongo.database"))
 
-	//选择表 my_collection
+	db = client.Database(config.Getstr("mongo.database"))
 	collection = db.Collection(config.Getstr("mongo.collection"))
 	collection = collection
-	fmt.Println(collection)
+	return collection
 }
