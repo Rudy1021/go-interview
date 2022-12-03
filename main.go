@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"go-interview/api/database"
 )
 
 func main() {
-	defer orm.Db.Close()
-	router := router.InitRouter()
-	router.Run(":5555")
+	database.RunDatabase()
 }

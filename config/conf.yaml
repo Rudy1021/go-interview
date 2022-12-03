@@ -1,0 +1,7 @@
+lineBot:
+  channel_secret: "032341081985737a2ab743f07aa98bd1"
+  channel_access_token: "G+/NlUa1CgFuiAPqqhwKd7vPh+yQTP8tHmcPryuUcQLSf5QbWGovK5qjijWpeigdLlFa8cKgF8cZfrZYZZxlQawzj43YNZd5IPWNx31WI42zIfXvKao/k/UtDpe8m7K83FD/xiliX99HH5ZS9a+waQdB04t89/1O/w1cDnyilFU="
+
+mongo:
+  database: "admin"
+  collection: "userText"
