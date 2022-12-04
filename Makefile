@@ -8,3 +8,9 @@ setup:
 	go get -u github.com/spf13/cobra@latest
 	go get -d github.com/spf13/viper
 	go get -d go.mongodb.org/mongo-driver/mongo
+
+start:
+	go run main.go
+
+ngrok:
+	ngrok http 5555

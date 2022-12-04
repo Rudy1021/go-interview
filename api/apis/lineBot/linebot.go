@@ -2,6 +2,7 @@ package lineBot
 
 import (
 	"fmt"
+	"go-interview/api/apis/collections"
 	"go-interview/api/config"
 	"log"
 
@@ -31,8 +32,13 @@ func Mess(c *gin.Context) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+				if message.Text == "show" {
+					bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(collections.UserText_r_one(event.Source.UserID))).Do()
+
+				} else if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 					log.Print(err)
+				} else {
+					collections.UserText_c(event.Source.UserID, message.Text)
 				}
 			}
 		}

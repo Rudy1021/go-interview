@@ -1,7 +1,6 @@
 package router
 
 import (
-	. "go-interview/api/apis/collections"
 	"go-interview/api/apis/lineBot"
 
 	"github.com/gin-gonic/gin"
@@ -12,8 +11,6 @@ func InitRouter() *gin.Engine {
 	router.Use(CORS())
 	router.POST("/callback", lineBot.Mess)
 	/*-----------------------userText-----------------------*/
-	router.GET("/userText/Select/:id", UserText_r_one)
-	router.POST("/userText/Upload", UserText_c)
 	return router
 }
 
