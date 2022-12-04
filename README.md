@@ -10,3 +10,5 @@ cd to the directory, and type make setup. when done, type make start. then open 
 * [create the bot](https://developers.line.biz/en/)
 * [download the ngrok](https://ngrok.com/)
 
+# video
+this video show how to use this project, click [here](https://www.youtube.com/watch?v=_BOaK9ZhJUU)
